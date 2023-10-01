@@ -30,7 +30,7 @@ const Header = () => {
   ];
   return (
     <nav>
-      <div className="w-11/12 mx-auto py-3 flex justify-between items-center relative">
+      <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
           <span className="text-xl font-bold text-stone-700">
             Chef 🍳 Notes
@@ -64,7 +64,7 @@ const Header = () => {
 
           {
             <ul
-              className={`flex animate__animated bg-white flex-col lg:hidden gap-5 absolute w-full top-12  left-0 ${
+              className={`flex animate__animated bg-white flex-col lg:hidden gap-5 absolute w-full top-14  left-0 ${
                 isMenuOpen
                   ? "animate__fadeInRight "
                   : isPageLoad
