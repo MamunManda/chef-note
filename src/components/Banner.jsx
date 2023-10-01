@@ -8,13 +8,13 @@ const Banner = () => {
     >
       <div
         id="banner"
-        className="flex h-screen bg-white bg-opacity-95 flex-col-reverse md:flex-row items-center justify-around "
+        className="flex min-h-screen bg-white bg-opacity-95 flex-col-reverse md:flex-row items-center justify-around "
       >
         <div className="text space-y-4  text-center md:text-start ">
           <h1 className="text-5xl font-bold">
             With <span className="text-orange-400"> 30,000+</span> Recipies,
           </h1>
-          <div className=" max-w-[520px] rounded-full p-2 bg-orange-400 text-white">
+          <div className=" max-w-[520px] md:rounded-full p-2 bg-orange-400 text-white">
             <marquee direction="right">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
               harum magnam provident quidem earum quod modi unde, nobis atque

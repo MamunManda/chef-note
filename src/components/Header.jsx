@@ -64,7 +64,7 @@ const Header = () => {
 
           {
             <ul
-              className={`flex animate__animated bg-white flex-col lg:hidden gap-5 absolute w-full top-14  left-0 ${
+              className={`flex animate__animated bg-white flex-col lg:hidden gap-5 absolute z-10 bg-opacity-70 w-full top-14  left-0 ${
                 isMenuOpen
                   ? "animate__fadeInRight "
                   : isPageLoad
@@ -73,7 +73,12 @@ const Header = () => {
               } `}
             >
               {menu.map((item) => (
-                <NavLink className="border-b-2" key={item.path} to={item.path}>
+                <NavLink
+                  className="border-b-2 hover:border-orange-500 transition duration-200
+                   "
+                  key={item.path}
+                  to={item.path}
+                >
                   {item.name}
                 </NavLink>
               ))}
