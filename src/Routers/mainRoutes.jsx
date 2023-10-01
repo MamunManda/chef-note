@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
+import RootLayout from "../layouts/RootLayout";
 
 const mainRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <h2>This is Main</h2>,
+    element: <RootLayout></RootLayout>,
   },
 ]);
 
