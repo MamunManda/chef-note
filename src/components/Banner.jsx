@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import animation from "../assets/cooking.json";
+
 import Lottie from "lottie-react";
+import Loading from "../pages/Loading";
 const Banner = () => {
+  const [cat, setCat] = useState([]);
+  useEffect(() => {
+    fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
+      .then((res) => res.json())
+      .then((data) => setCat(data.meals));
+  }, []);
+
+  if (!cat.length) {
+    return <Loading></Loading>;
+  }
+
   return (
     <section
       className="bg-contain bg-fixed"
@@ -16,18 +30,7 @@ const Banner = () => {
           </h1>
           <div className=" max-w-[520px] md:rounded-full p-2 bg-orange-400 text-white">
             <marquee direction="right">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              harum magnam provident quidem earum quod modi unde, nobis atque
-              voluptas, voluptatem assumenda fugit ipsum inventore. Fugiat totam
-              sit, necessitatibus harum maxime animi temporibus adipisci
-              perferendis cum architecto dolore, cumque nobis, doloribus
-              exercitationem! Fugiat ipsum fuga quasi officia nemo suscipit
-              error nostrum aut reprehenderit maxime ipsa quos culpa vel, earum
-              unde exercitationem voluptatibus odit nihil voluptas natus.
-              Consequatur vitae rerum porro cumque nihil dolor numquam tempora
-              eos et sapiente aliquid, reiciendis, ex nisi officia quibusdam,
-              voluptas aspernatur error corporis. Laudantium tempora tempore
-              quos neque id minima officiis, doloremque aperiam dolor inventore!
+              {cat?.map((item) => item.strCategory).join(" , ")}
             </marquee>
           </div>
 

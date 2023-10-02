@@ -11,7 +11,6 @@ const CategorySingle = ({ data: category }) => {
       .then((data) => setFoods(data.meals));
   }, []);
 
-  console.log(category);
   if (foods.length <= 4) return;
 
   return (

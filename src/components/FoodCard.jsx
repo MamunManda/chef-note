@@ -1,5 +1,4 @@
 const FoodCard = ({ food }) => {
-  console.log(food);
   return (
     <div className="shadow-xl rounded-lg relative overflow-hidden transition duration-200 hover:-translate-y-2">
       <img
