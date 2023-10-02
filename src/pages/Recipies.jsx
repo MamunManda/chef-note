@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "./Loading";
 import { useLocation } from "react-router-dom";
 import FoodCard from "../components/FoodCard";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Recipies = () => {
   const [cat, setCat] = useState([]);

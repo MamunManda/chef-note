@@ -3,6 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home";
 import Error from "../pages/Error";
 import Recipies from "../pages/Recipies";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const mainRoutes = createBrowserRouter([
 
         loader: () =>
           fetch("https://www.themealdb.com/api/json/v1/1/categories.php"),
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "registration",
+        element: <Register></Register>,
       },
     ],
   },
