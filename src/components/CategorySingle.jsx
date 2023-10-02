@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
+import { Link } from "react-router-dom";
 
 const CategorySingle = ({ data: category }) => {
   const { strCategory, idCategory, strCategoryThumb } = category || {};
@@ -31,8 +32,14 @@ const CategorySingle = ({ data: category }) => {
           <FoodCard key={food.idMeal} food={food}></FoodCard>
         ))}
       </div>
-      <div className="text-center">
-        <button>See All Recipe </button>
+      <div className="text-center mt-5">
+        <Link
+          className="btn"
+          to="/recipies"
+          state={{ strCategory, strCategoryThumb }}
+        >
+          See All Recipies
+        </Link>
       </div>
     </div>
   );
