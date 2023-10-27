@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setisPageLoad] = useState(false);
   const menu = [
@@ -17,19 +19,16 @@ const Header = () => {
       path: "/recipies",
       type: "public",
     },
-    {
-      name: "Login",
-      path: "/login",
-      type: "public",
-    },
-    {
-      name: "Register",
-      path: "/registration",
-      type: "public",
-    },
   ];
   return (
     <nav>
+      {user && (
+        <p className="text-center text-white bg-black py-2 bg-opacity-90">
+          Welcome Mr. {user?.displayName} ❤️‍🔥❤️‍🔥. Now You Can Watch All the
+          Recipies🍉🍉
+        </p>
+      )}
+      <div className="text-center bg-slate-400"></div>
       <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
           <span className="text-xl font-bold text-stone-700">
@@ -38,12 +37,25 @@ const Header = () => {
         </Link>
 
         {/* menu-lg start */}
-        <ul className="hidden lg:flex gap-5 ">
+        <ul className="hidden lg:flex items-center gap-5 ">
           {menu.map((item) => (
             <NavLink key={item.path} to={item.path}>
               {item.name}
             </NavLink>
           ))}
+          {user && user?.email ? (
+            <>
+              <NavLink to="/kitchen">🍉My-Kitchen</NavLink>
+              <button className="cursor-pointer" onClick={logOut}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/registration">Register</NavLink>
+            </>
+          )}
         </ul>
 
         <div className="lg:hidden ">

@@ -3,8 +3,41 @@ import Title from "../components/Title";
 import happy from "../assets/happy.json";
 import { BiEnvelope, BiKey } from "react-icons/bi";
 import Social from "../components/Social";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const location = useLocation();
+
+  const navigate = useNavigate();
+  console.log(location);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const pass = form.pass.value;
+
+    signIn(email, pass)
+      .then((res) => {
+        const user = res.user;
+        alert("successfull");
+        axios
+          .post(
+            "http://localhost:5000/jwt",
+            { email },
+            { withCredentials: true }
+          )
+          .then((data) => console.log(data));
+
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className=" bg-[url(/bg.png)] bg-contain ">
       <div className=" bg-white bg-opacity-90 min-h-screen">
@@ -16,7 +49,7 @@ const Login = () => {
           <div className="flex  justify-between items-center gap-5 pt-8">
             <div className="login-for flex-1">
               <form
-                action=""
+                onSubmit={handleSubmit}
                 className="bg-white p-5 flex flex-col gap-8 backdrop-blur-sm bg-opacity-10 shadow-lg rounded-lg"
               >
                 <div className="flex justify-start items-center">

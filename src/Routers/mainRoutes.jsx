@@ -5,6 +5,10 @@ import Error from "../pages/Error";
 import Recipies from "../pages/Recipies";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Category from "../pages/Category";
+import Recipie from "../pages/Recipie";
+import PrivateRoute from "./PrivateRoute";
+import Kitchen from "../pages/Kitchen";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -16,19 +20,37 @@ const mainRoutes = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
 
-        loader: () =>
-          fetch("https://www.themealdb.com/api/json/v1/1/categories.php"),
+        loader: () => fetch("http://localhost:5000/categories"),
       },
       {
-        path: "recipies",
-        element: <Recipies></Recipies>,
+        path: "/recipies/:category",
+        element: <Category></Category>,
 
-        loader: () =>
-          fetch("https://www.themealdb.com/api/json/v1/1/categories.php"),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/recipies/${params.category}`),
+      },
+      {
+        path: "recipie/:id",
+        element: (
+          <PrivateRoute>
+            <Recipie></Recipie>
+          </PrivateRoute>
+        ),
+
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/recipie/${params.id}`),
       },
       {
         path: "login",
         element: <Login></Login>,
+      },
+      {
+        path: "kitchen",
+        element: (
+          <PrivateRoute>
+            <Kitchen></Kitchen>
+          </PrivateRoute>
+        ),
       },
       {
         path: "registration",
