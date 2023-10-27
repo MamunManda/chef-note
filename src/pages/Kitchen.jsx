@@ -2,15 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Title from "../components/Title";
 import KitchenItem from "../components/KitchenItem";
+import axios from "axios";
 
 const Kitchen = () => {
   const { user } = useContext(AuthContext);
   const [recipies, setRecipies] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/cart?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setRecipies(data));
+    axios
+      .get(`http://localhost:5000/cart?email=${user?.email}`, {
+        withCredentials: true,
+      })
+      .then((res) => setRecipies(res.data));
   }, [user]);
+
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/cart/${id}`, {
       method: "DELETE",

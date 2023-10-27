@@ -8,6 +8,8 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setisPageLoad] = useState(false);
+
+  console.log(import.meta.env.VITE_ADMIN_EMAIL);
   const menu = [
     {
       name: "Home",
@@ -46,6 +48,8 @@ const Header = () => {
           {user && user?.email ? (
             <>
               <NavLink to="/kitchen">🍉My-Kitchen</NavLink>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+
               <button className="cursor-pointer" onClick={logOut}>
                 Logout
               </button>

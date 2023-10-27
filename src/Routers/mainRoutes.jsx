@@ -10,6 +10,12 @@ import Recipie from "../pages/Recipie";
 import PrivateRoute from "./PrivateRoute";
 import Kitchen from "../pages/Kitchen";
 
+import Dashboard from "../layouts/Dashboard";
+import Title from "../components/Title";
+import AddProduct from "../pages/dashboard/AddProduct";
+import ManageProduct from "../pages/dashboard/ManageProduct";
+import Update from "../pages/dashboard/Update";
+
 const mainRoutes = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +27,14 @@ const mainRoutes = createBrowserRouter([
         element: <Home></Home>,
 
         loader: () => fetch("http://localhost:5000/categories"),
+      },
+      {
+        path: "/recipies",
+        element: (
+          <PrivateRoute>
+            <Recipies></Recipies>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/recipies/:category",
@@ -55,6 +69,44 @@ const mainRoutes = createBrowserRouter([
       {
         path: "registration",
         element: <Register></Register>,
+      },
+      {},
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Title>Dashboard</Title>,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: (
+          <PrivateRoute>
+            <AddProduct></AddProduct>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-product",
+        element: (
+          <PrivateRoute>
+            <ManageProduct></ManageProduct>
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/dashboard/update-product/:id",
+        element: (
+          <PrivateRoute>
+            <Update></Update>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/recipie/${params.id}`),
       },
     ],
   },

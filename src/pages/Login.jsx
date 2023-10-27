@@ -7,6 +7,9 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { data } from "autoprefixer";
+
+import loginAnimation from "../assets/loginAnimation.json";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -24,15 +27,34 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         alert("successfull");
+        // axios
+        //   .post(
+        //     "http://localhost:5000/jwt",
+        //     { email },
+        //     { withCredentials: true }
+        //   )
+        //   .then((data) => console.log(data));
+
         axios
           .post(
             "http://localhost:5000/jwt",
             { email },
             { withCredentials: true }
           )
-          .then((data) => console.log(data));
+          .then((res) => console.log(res.data));
 
-        navigate(`${location.state ? location.state : "/"}`);
+        // fetch("http://localhost:5000/jwt", {
+        //   method: "POST",
+        //   credentials: "include",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify({ email: email }),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => console.log(data));
+
+        // navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((err) => {
         console.log(err);
@@ -93,8 +115,8 @@ const Login = () => {
               </form>
             </div>
             <Social></Social>
-            <div className="lottie  flex-1 max-h-[300px] mx-20">
-              <Lottie animationData={happy}></Lottie>
+            <div className="lottie  flex-1 mx-20">
+              <Lottie animationData={loginAnimation} loop={true}></Lottie>
             </div>
           </div>
         </div>
